@@ -28,7 +28,7 @@ function resolveMonacoTheme(theme: string | undefined): string {
 
 function diffModelPath(filePath: string, side: 'orig' | 'mod'): string {
   const key = encodeURIComponent(filePath.replace(/\\/g, '/'));
-  return `inmemory://clawx-diff/${side}/${key}`;
+  return `inmemory://csclaw-diff/${side}/${key}`;
 }
 
 export default function MonacoDiffViewer({

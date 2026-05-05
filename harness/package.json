@@ -1,10 +1,10 @@
 {
-  "name": "@clawx/harness",
+  "name": "@csclaw/harness",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "bin": {
-    "clawx-harness": "./src/cli.mjs"
+    "csclaw-harness": "./src/cli.mjs"
   },
   "scripts": {
     "start": "node src/cli.mjs"

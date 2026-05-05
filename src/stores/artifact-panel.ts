@@ -83,7 +83,7 @@ export const useArtifactPanel = create<ArtifactPanelState>()(
       setWidthPct: (pct) => set({ widthPct: clampWidth(pct) }),
     }),
     {
-      name: 'clawx.artifact-panel',
+      name: 'csclaw.artifact-panel',
       // Only persist the user-controlled width — open/tab/focus reset on reload.
       partialize: (state) => ({ widthPct: state.widthPct }),
     },

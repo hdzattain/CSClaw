@@ -41,7 +41,7 @@ const history = [
   },
 ];
 
-test.describe('ClawX chat file changes', () => {
+test.describe('CSClaw chat file changes', () => {
   test('shows line stats on generated file cards', async ({ launchElectronApp }) => {
     const app = await launchElectronApp({ skipSetup: true });
 

@@ -10,10 +10,10 @@ const GATEWAY_FETCH_PRELOAD_SOURCE = `'use strict';
 (function () {
   var _f = globalThis.fetch;
   if (typeof _f !== 'function') return;
-  if (globalThis.__clawxFetchPatched) return;
-  globalThis.__clawxFetchPatched = true;
+  if (globalThis.__csclawFetchPatched) return;
+  globalThis.__csclawFetchPatched = true;
 
-  globalThis.fetch = function clawxFetch(input, init) {
+  globalThis.fetch = function csclawFetch(input, init) {
     var url =
       typeof input === 'string' ? input
         : input && typeof input === 'object' && typeof input.url === 'string'
@@ -33,7 +33,7 @@ const GATEWAY_FETCH_PRELOAD_SOURCE = `'use strict';
       delete flat['x-title'];
       delete flat['X-Title'];
       flat['HTTP-Referer'] = 'https://claw-x.com';
-      flat['X-Title'] = 'ClawX';
+      flat['X-Title'] = 'CSClaw';
       init.headers = flat;
     }
     return _f.call(globalThis, input, init);
@@ -42,8 +42,8 @@ const GATEWAY_FETCH_PRELOAD_SOURCE = `'use strict';
   if (process.platform === 'win32') {
     try {
       var cp = require('child_process');
-      if (!cp.__clawxPatched) {
-        cp.__clawxPatched = true;
+      if (!cp.__csclawPatched) {
+        cp.__csclawPatched = true;
         ['spawn', 'exec', 'execFile', 'fork', 'spawnSync', 'execSync', 'execFileSync'].forEach(function(method) {
           var original = cp[method];
           if (typeof original !== 'function') return;
@@ -123,13 +123,13 @@ export async function launchGatewayProcess(options: {
   // The OpenClaw gateway advertises `_openclaw-gw._tcp.local` on every
   // active network interface using a hardcoded `openclaw.local` hostname,
   // which causes:
-  //   - cross-machine name collisions when multiple OpenClaw/ClawX peers
+  //   - cross-machine name collisions when multiple OpenClaw/CSClaw peers
   //     share a LAN (each falls back to "<name> (OpenClaw) (2)")
   //   - self-collisions on multi-homed hosts (Wi-Fi + Tailscale + utun ...)
-  //   - "ghost" record collisions after an unclean ClawX exit, because
+  //   - "ghost" record collisions after an unclean CSClaw exit, because
   //     SIGKILL prevents ciao from emitting the mDNS goodbye record.
   //
-  // ClawX has no UI for LAN gateway discovery today, so the advertiser is
+  // CSClaw has no UI for LAN gateway discovery today, so the advertiser is
   // pure log noise.  `OPENCLAW_DISABLE_BONJOUR=1` short-circuits
   // `startGatewayBonjourAdvertiser()` (openclaw `src/infra/bonjour.ts`,
   // `isDisabledByEnv()`).  Set after the `forkEnv` spread so any
